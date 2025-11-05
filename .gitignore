@@ -1,0 +1,55 @@
+# =========================
+# CMake build artifacts
+# =========================
+/build/
+/CMakeFiles/
+/CMakeCache.txt
+/Makefile
+/*.cmake
+/*.dir/
+
+# =========================
+# Compiled libraries / binaries
+# =========================
+*.so
+*.dll
+*.dylib
+*.exe
+*.obj
+*.o
+*.a
+*.lib
+
+# =========================
+# Python caches
+# =========================
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pytest_cache/
+
+# =========================
+# IDE / editor files
+# =========================
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# =========================
+# macOS
+# =========================
+.DS_Store
+
+# =========================
+# Windows
+# =========================
+Thumbs.db
+*.log
+
+# =========================
+# GitHub Actions artifacts
+# =========================
+*.zip
+

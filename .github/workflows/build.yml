@@ -1,0 +1,49 @@
+name: Build CFuncPyPlot
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+
+    steps:
+      # Step 1: Checkout source code
+      - uses: actions/checkout@v3
+
+      # Step 2: Setup CMake (cross-platform)
+      - name: Setup CMake
+        uses: jwlawson/actions-setup-cmake@v1
+        with:
+          cmake-version: '3.26.4'
+
+      # Step 3: Setup Python
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      # Step 4: Configure CMake
+      - name: Configure CMake
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+
+      # Step 5: Build the shared library
+      - name: Build
+        run: cmake --build build --config Release
+
+      # Step 6: List the release files
+      - name: List release files
+        run: ls build/release || dir build\release
+
+      # Step 7: Upload release artifact
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: CFuncPyPlot-${{ matrix.os }}
+          path: build/release
+
