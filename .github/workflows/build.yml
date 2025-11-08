@@ -42,7 +42,7 @@ jobs:
 
       # Step 7: Upload release artifact
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: CFuncPyPlot-${{ matrix.os }}
           path: build/release
