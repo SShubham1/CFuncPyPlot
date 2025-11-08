@@ -11,7 +11,7 @@ if sys.platform.startswith("linux"):
 elif sys.platform == "darwin":
     libname = "./libfunction_data.dylib"
 elif sys.platform == "win32":
-    libname = "./function_data.dll"
+    libname = "./function_data.dll" || "./Release/function_data.dll"
 else:
     raise Exception("Unsupported OS")
 
