@@ -4,16 +4,18 @@ import numpy as np
 import os
 import sys
 
-# Detect platform and load the correct library
-
+# Candidate library paths per platform
 if sys.platform.startswith("linux"):
-    libname = "./libfunction_data.so"
+    candidates = ["./libfunction_data.so"]
 elif sys.platform == "darwin":
-    libname = "./libfunction_data.dylib"
+    candidates = ["./libfunction_data.dylib"]
 elif sys.platform == "win32":
-    libname = "./function_data.dll" || "./Release/function_data.dll"
+    candidates = ["./function_data.dll", "./Release/function_data.dll"]
 else:
     raise Exception("Unsupported OS")
+
+# Prefer an existing path; otherwise try the first candidate (so ctypes raises a helpful error)
+libpath = next((p for p in candidates if os.path.exists(p)), candidates[0])
 
 lib = ctypes.CDLL(libname)
 
